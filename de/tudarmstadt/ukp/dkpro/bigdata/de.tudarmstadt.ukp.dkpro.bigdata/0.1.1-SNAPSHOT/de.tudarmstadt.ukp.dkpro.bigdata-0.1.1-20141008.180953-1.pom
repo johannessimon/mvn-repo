@@ -1,0 +1,179 @@
+<!--
+  Copyright 2011
+  Ubiquitous Knowledge Processing (UKP) Lab
+  Technische Universität Darmstadt
+  
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+  
+    http://www.apache.org/licenses/LICENSE-2.0
+  
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	 <parent>
+                <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+                <artifactId>dkpro-parent-pom</artifactId> 
+                <version>6</version>
+                <relativePath />
+        </parent>
+	<groupId>de.tudarmstadt.ukp.dkpro.bigdata</groupId>
+	<artifactId>de.tudarmstadt.ukp.dkpro.bigdata</artifactId>
+	<version>0.1.1-SNAPSHOT</version>
+	<properties>
+<!--  	<hadoop.version>2.0.0-mr1-cdh4.5.0</hadoop.version> -->
+  <hadoop.version>2.2.0</hadoop.version> 
+	</properties>
+	<packaging>pom</packaging>
+	<modules>
+		<module>de.tudarmstadt.ukp.dkpro.bigdata.collocations</module>
+     	 
+			 
+		<module>de.tudarmstadt.ukp.dkpro.bigdata.hadoop</module>
+		<module>de.tudarmstadt.ukp.dkpro.bigdata.io.hadoop</module>
+		<module>de.tudarmstadt.ukp.dkpro.bigdata.examples</module>
+	</modules>
+	<dependencyManagement>
+		 <dependencies>
+			<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.bigdata</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.bigdata.hadoop</artifactId>
+				<version>0.1.1-SNAPSHOT</version>
+			</dependency> 
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.bigdata</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.bigdata.io.hadoop</artifactId>
+				<version>0.1.1-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core-asl</artifactId>
+				<version>1.5.0</version>
+				<scope>import</scope>
+				<type>pom</type>
+			</dependency>
+	<dependency>
+		<groupId>org.apache.hadoop</groupId>
+		<artifactId>hadoop-client</artifactId>
+		<version>${hadoop.version}</version>
+		</dependency>
+			
+			<dependency>
+				<groupId>log4j</groupId>
+				<artifactId>log4j</artifactId>
+				<version>1.2.15</version>
+				<exclusions>
+					<exclusion>
+						<artifactId>jmxri</artifactId>
+						<groupId>com.sun.jmx</groupId>
+					</exclusion>
+					<exclusion>
+						<artifactId>jmxtools</artifactId>
+						<groupId>com.sun.jdmk</groupId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+
+		
+		</dependencies>
+	</dependencyManagement>
+	<profiles>
+		<profile>
+			<id>rat-check</id>
+			<activation>
+				<file>
+					<exists>src/main/java</exists>
+				</file>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.rat</groupId>
+						<artifactId>apache-rat-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>default</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>check</goal>
+								</goals>
+								<configuration>
+									<excludes>
+										<exclude>.*</exclude>
+										<exclude>dependency-reduced-pom.xml</exclude>
+										<exclude>pom.xml</exclude>
+										<!-- maven config files -->
+										<exclude>src/filter/**/*</exclude>
+										<!-- release generated artifact -->
+										<exclude>release.properties</exclude>
+										<exclude>CHANGES</exclude>
+										<exclude>LICENCE.txt</exclude>
+										<exclude>MANIFEST.MF</exclude>
+										<exclude>NOTICE.txt</exclude>
+										<exclude>README.txt</exclude>
+										<exclude>src/main/resources/**/*</exclude>
+										<exclude>src/test/resources/**/*</exclude>
+										<!-- generated JCas wrappers -->
+										<exclude>src/main/java/**/type/**/*</exclude>
+										<exclude>build/test/data/dfs/**/*</exclude>
+									</excludes>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+	<name>DKPro BigData</name>
+	<url>https://code.google.com/p/dkpro-bigdata/</url>
+	<description>DKPro BigData enables the easy execution of UIMA-based natural language processing pipelines on a hadoop cluster.</description>
+	<inceptionYear>2013</inceptionYear>
+	<scm>
+		<url>https://code.google.com/p/dkpro-bigdata/source/browse/#git</url>
+		<connection>scm:git:https://code.google.com/p/dkpro-bigdata/</connection>
+		<developerConnection>scm:git:https://code.google.com/p/dkpro-bigdata/ </developerConnection>
+	  <tag>HEAD</tag>
+  </scm>
+	<issueManagement>
+		<system>Google Code</system>
+		<url>https://code.google.com/p/dkpro-bigdata/issues/list</url>
+	</issueManagement>
+	<build>
+		<extensions>
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-webdav</artifactId>
+				<version>1.0-beta-2</version>
+			</extension>
+		</extensions>
+	</build>
+<repositories>
+<repository>
+  <id>maven-hadoop</id>
+  <name>Hadoop Releases</name>
+  <url>https://repository.cloudera.com/content/repositories/releases/</url>
+</repository>
+  <repository>
+  <id>cloudera-repos</id>
+  <name>Cloudera Repos</name>
+  <url>https://repository.cloudera.com/artifactory/cloudera-repos/</url>
+</repository>
+</repositories>
+	<distributionManagement>
+		<!-- <repository>
+			<id>ukp-oss</id>
+			<url>dav:https://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-ukp-releases-local</url>
+		</repository> -->
+		<snapshotRepository>
+			<id>ukp-oss</id>
+			<url>file:///Users/jsimon/git/mvn-repo</url>
+		</snapshotRepository>
+	</distributionManagement>
+</project>
