@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata modelVersion="1.1.0">
+  <groupId>de.tudarmstadt.lt</groupId>
+  <artifactId>de.tudarmstadt.lt.chinese-whispers</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <versioning>
+    <snapshot>
+      <timestamp>20141031.112656</timestamp>
+      <buildNumber>1</buildNumber>
+    </snapshot>
+    <lastUpdated>20141031112656</lastUpdated>
+    <snapshotVersions>
+      <snapshotVersion>
+        <extension>jar</extension>
+        <value>0.0.1-20141031.112656-1</value>
+        <updated>20141031112656</updated>
+      </snapshotVersion>
+      <snapshotVersion>
+        <extension>pom</extension>
+        <value>0.0.1-20141031.112656-1</value>
+        <updated>20141031112656</updated>
+      </snapshotVersion>
+    </snapshotVersions>
+  </versioning>
+</metadata>
